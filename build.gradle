@@ -28,7 +28,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    arch_lifecycle_version = "1.0.0-alpha2"
-    arc_room_version = "1.0.0-alpha2"
+    arch_lifecycle_version = "1.0.0-alpha3"
+    arc_room_version = "1.0.0-alpha3"
     android_support_version = '25.4.0'
 }
