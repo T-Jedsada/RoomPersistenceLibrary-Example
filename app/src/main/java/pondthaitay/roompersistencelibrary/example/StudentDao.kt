@@ -17,6 +17,6 @@ interface StudentDao {
     @Query("SELECT * FROM student")
     fun getStudentAll(): Flowable<MutableList<StudentEntity>>
 
-    @Query("SELECT * FROM student WHERE student.code = :arg0")
+    @Query("SELECT * FROM student WHERE student.student_code = :arg0")
     fun getEmailsForUser(studentCode: Int): Flowable<StudentEntity>
 }
