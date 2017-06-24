@@ -15,14 +15,31 @@ class MainActivity : AppCompatActivity() {
 
         val appDatabase = AppDatabase.getAppDatabase(this)
 
-        Flowable.fromCallable { appDatabase.studentDao().insertStudent(StudentEntity()) }
+        val jedsadaAddress = AddressEntity()
+        jedsadaAddress.city = "Muang"
+        jedsadaAddress.postCode = 50200
+        jedsadaAddress.street = "Canal Road"
+        jedsadaAddress.state = "Chiang Mai"
+
+        val jedsada = StudentEntity()
+
+        jedsada.code = 55021744
+        jedsada.email = "jedsada@gmail.com"
+        jedsada.firstName = "Jedsda"
+        jedsada.lastName = "Tiwongvorakul"
+        jedsada.address = jedsadaAddress
+
+        Flowable.fromCallable { appDatabase.studentDao().insertStudent(jedsada) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     appDatabase.studentDao().getStudentAll()
-                            .subscribe({ it.forEach {
-                                Log.e("POND", it.id.toString() + "\t" + it.firstName)
-                            } }, { it.printStackTrace() })
+                            .subscribe({
+                                it.forEach {
+                                    Log.e("POND", it.id.toString() + "\t" + it.firstName + "\n" +
+                                            it.address?.state)
+                                }
+                            }, { it.printStackTrace() })
                 }, { it.printStackTrace() })
     }
 }
