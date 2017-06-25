@@ -3,7 +3,6 @@ package pondthaitay.roompersistencelibrary.example
 import android.arch.persistence.room.*
 import io.reactivex.Flowable
 
-
 @Dao
 interface StudentDao {
     @Insert

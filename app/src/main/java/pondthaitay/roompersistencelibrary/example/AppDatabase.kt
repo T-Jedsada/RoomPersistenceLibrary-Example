@@ -8,7 +8,7 @@ import android.arch.persistence.room.migration.Migration
 import android.content.Context
 
 
-@Database(entities = arrayOf(StudentEntity::class), version = 16)
+@Database(entities = arrayOf(StudentEntity::class), version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
@@ -21,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getAppDatabase(context: Context): AppDatabase =
                 Room.databaseBuilder(context, AppDatabase::class.java, "db_app")
-                        .addMigrations(MIGRATION_15_16).build()
+                        .addMigrations().build()
     }
 
     abstract fun studentDao(): StudentDao

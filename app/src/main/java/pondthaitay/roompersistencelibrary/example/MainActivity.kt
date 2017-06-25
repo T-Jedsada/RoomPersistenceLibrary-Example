@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         jedsada.email = "jedsada@gmail.com"
         jedsada.firstName = "Jedsda"
         jedsada.lastName = "Tiwongvorakul"
-        jedsada.address = jedsadaAddress
+        jedsada.address = ""
 
         Flowable.fromCallable { appDatabase.studentDao().insertStudent(jedsada) }
                 .subscribeOn(Schedulers.io())
@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
                     appDatabase.studentDao().getStudentAll()
                             .subscribe({
                                 it.forEach {
-                                    Log.e("POND", it.id.toString() + "\t" + it.firstName + "\n" +
-                                            it.address?.state)
+                                    Log.e("POND", it.id.toString() + "\t" + it.firstName + "\n")
                                 }
                             }, { it.printStackTrace() })
                 }, { it.printStackTrace() })
