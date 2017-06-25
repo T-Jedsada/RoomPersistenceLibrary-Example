@@ -1,6 +1,7 @@
 package pondthaitay.roompersistencelibrary.example
 
 import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
@@ -11,4 +12,5 @@ data class StudentEntity(@PrimaryKey(autoGenerate = true) var id: Int? = null,
                          @ColumnInfo(name = "last_name") var lastName: String? = null,
                          var email: String? = null,
                          var gender: String? = null,
-                         var address: String? = null)
+                         var age: Int? = 0,
+                         @Embedded var address: AddressModel? = null)

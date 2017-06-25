@@ -7,12 +7,11 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.migration.Migration
 import android.content.Context
 
-
 @Database(entities = arrayOf(StudentEntity::class), version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
-        private val MIGRATION_15_16: Migration = object : Migration(15, 16) {
+        private val MIGRATION_1_to_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE student "
                         + " ADD COLUMN age INTEGER")
@@ -21,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getAppDatabase(context: Context): AppDatabase =
                 Room.databaseBuilder(context, AppDatabase::class.java, "db_app")
-                        .addMigrations().build()
+                        .addMigrations(MIGRATION_1_to_2).build()
     }
 
     abstract fun studentDao(): StudentDao
