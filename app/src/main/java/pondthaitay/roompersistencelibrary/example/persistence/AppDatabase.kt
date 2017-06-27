@@ -1,4 +1,4 @@
-package pondthaitay.roompersistencelibrary.example
+package pondthaitay.roompersistencelibrary.example.persistence
 
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database

@@ -1,10 +1,12 @@
-package pondthaitay.roompersistencelibrary.example
+package pondthaitay.roompersistencelibrary.example.persistence
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 import io.reactivex.Flowable
 
-@Dao
+@android.arch.persistence.room.Dao
 interface StudentDao {
     @Insert
     fun insertStudent(studentEntity: StudentEntity)
@@ -19,7 +21,7 @@ interface StudentDao {
 //    fun getStudentAll(): Flowable<List<StudentEntity>>
 
     @Query("SELECT * FROM student")
-    fun getStudentAll(): LiveData<List<StudentEntity>>
+    fun getStudentAll(): Flowable<List<StudentEntity>>
 
     @Query("SELECT * FROM student WHERE student.student_code = :arg0")
     fun getStudentByCode(studentCode: Int): Flowable<List<StudentEntity>>

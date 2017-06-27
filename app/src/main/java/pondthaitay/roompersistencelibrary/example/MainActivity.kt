@@ -1,12 +1,10 @@
 package pondthaitay.roompersistencelibrary.example
 
 import android.arch.lifecycle.LifecycleActivity
-import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import pondthaitay.roompersistencelibrary.example.persistence.AddressModel
+import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 
 class MainActivity : LifecycleActivity() {
 
@@ -15,8 +13,6 @@ class MainActivity : LifecycleActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val appDatabase = AppDatabase.getAppDatabase(this)
 
         val scoopsAddress = AddressModel()
         scoopsAddress.city = "Muang"
@@ -31,14 +27,8 @@ class MainActivity : LifecycleActivity() {
         scoopsStudent.lastName = "CNX"
         scoopsStudent.address = scoopsAddress
 
-        appDatabase.studentDao().getStudentAll()
-                .observe(this, Observer {
-                    it?.forEach { Log.d(TAG, it.toString()) }
-                })
-
-        Flowable.fromCallable { appDatabase.studentDao().insertStudent(scoopsStudent) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { Log.d(TAG, "insert complete") }
+        val mMainViewModelFactory = Injection.provideMainViewModelFactory(this)
+        val mMainViewModel = ViewModelProviders.of(this, mMainViewModelFactory)
+                .get(MainViewModel::class.java)
     }
 }

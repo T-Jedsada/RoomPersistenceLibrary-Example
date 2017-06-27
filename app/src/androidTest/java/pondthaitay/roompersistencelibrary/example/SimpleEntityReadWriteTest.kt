@@ -9,6 +9,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import pondthaitay.roompersistencelibrary.example.persistence.AppDatabase
+import pondthaitay.roompersistencelibrary.example.persistence.StudentDao
+import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
