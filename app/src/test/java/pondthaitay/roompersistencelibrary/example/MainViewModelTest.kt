@@ -84,6 +84,7 @@ class MainViewModelTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun getStudentAllLiveData() {
         val studentTest = StudentEntity()
         studentTest.firstName = "test"
@@ -95,6 +96,7 @@ class MainViewModelTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun deleteTableStudent() {
         mainViewModel.deleteTableStudent()
     }
