@@ -40,9 +40,11 @@ class MainActivity : LifecycleActivity() {
             it?.forEach { Log.d(TAG, "$it") }
         })
 
-        btn_insert_student.setOnClickListener {  mMainViewModel.insertStudent(scoopsStudent)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe { Log.d(TAG, "insert complete") } }
+        btn_insert_student.setOnClickListener {
+            mMainViewModel.insertStudent(scoopsStudent)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe { Log.d(TAG, "insert complete") }
+        }
     }
 }

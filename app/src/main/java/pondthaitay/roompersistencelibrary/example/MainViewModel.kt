@@ -4,30 +4,31 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import io.reactivex.functions.Action
 import io.reactivex.internal.operators.completable.CompletableFromAction
+import pondthaitay.roompersistencelibrary.example.persistence.StudentDao
 import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 
-class MainViewModel(private val studentDataSource: StudentDataSource) : ViewModel() {
+class MainViewModel(private val studentDao: StudentDao) : ViewModel() {
 
     fun insertStudent(studentEntity: StudentEntity) = CompletableFromAction(Action {
-        studentDataSource.insertStudent(studentEntity)
+        studentDao.insertStudent(studentEntity)
     })
 
     fun updateStudent(studentEntity: StudentEntity) = CompletableFromAction(Action {
-        studentDataSource.updateStudent(studentEntity)
+        studentDao.updateStudent(studentEntity)
     })
 
     fun deleteStudent(studentEntity: StudentEntity) = CompletableFromAction(Action {
-        studentDataSource.deleteStudent(studentEntity)
+        studentDao.deleteStudent(studentEntity)
     })
 
-    fun getStudentAll() = studentDataSource.getStudentAll()
+    fun getStudentAll() = studentDao.getStudentAll()
 
-    fun getStudentAllLiveDta() = studentDataSource.getStudentAllLiveData()
+    fun getStudentAllLiveDta() = studentDao.getStudentAllLiveData()
 
-    fun deleteTableStudent() = studentDataSource.deleteTable()
+    fun deleteTableStudent() = studentDao.deleteTable()
 
-    class MainViewModelFactory(val studentDataSource: StudentDataSource) : ViewModelProvider.Factory {
+    class MainViewModelFactory(private val studentDao: StudentDao) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>?): T = MainViewModel(studentDataSource) as T
+        override fun <T : ViewModel?> create(modelClass: Class<T>?): T = MainViewModel(studentDao) as T
     }
 }

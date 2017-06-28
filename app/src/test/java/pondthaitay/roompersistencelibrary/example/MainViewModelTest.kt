@@ -16,6 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.MockitoAnnotations
+import pondthaitay.roompersistencelibrary.example.persistence.StudentDao
 import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 
 @RunWith(JUnit4::class)
@@ -23,9 +24,9 @@ class MainViewModelTest {
     @Rule @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val mockStudentDataSource = mock<StudentDataSource> {}
+    private val mockStudentDao = mock<StudentDao> {}
 
-    private val mainViewModel = MainViewModel(mockStudentDataSource)
+    private val mainViewModel = MainViewModel(mockStudentDao)
 
     private val mockObserver = mock<Observer<List<StudentEntity>>> {}
 
@@ -71,7 +72,7 @@ class MainViewModelTest {
     fun getStudentAll() {
         val studentTest = StudentEntity()
         studentTest.firstName = "test"
-        whenever(mockStudentDataSource.getStudentAll())
+        whenever(mockStudentDao.getStudentAll())
                 .thenReturn(Flowable.just(arrayListOf(studentTest)))
         val testSubscribe = mainViewModel.getStudentAll().test()
         testSubscribe.assertSubscribed()
@@ -90,7 +91,7 @@ class MainViewModelTest {
         studentTest.firstName = "test"
         val listStudent = MutableLiveData<List<StudentEntity>>()
         listStudent.value = arrayListOf(studentTest)
-        whenever(mockStudentDataSource.getStudentAllLiveData()).thenReturn(listStudent)
+        whenever(mockStudentDao.getStudentAllLiveData()).thenReturn(listStudent)
         mainViewModel.getStudentAllLiveDta().observeForever(mockObserver)
         verify(mockObserver, times(1)).onChanged(listStudent.value)
     }
