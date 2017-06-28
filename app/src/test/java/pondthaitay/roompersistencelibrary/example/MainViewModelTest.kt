@@ -72,8 +72,7 @@ class MainViewModelTest {
     fun getStudentAll() {
         val studentTest = StudentEntity()
         studentTest.firstName = "test"
-        whenever(mockStudentDao.getStudentAll())
-                .thenReturn(Flowable.just(arrayListOf(studentTest)))
+        whenever(mockStudentDao.getStudentAll()).thenReturn(Flowable.just(arrayListOf(studentTest)))
         val testSubscribe = mainViewModel.getStudentAll().test()
         testSubscribe.assertSubscribed()
         testSubscribe.assertNoErrors()
