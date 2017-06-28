@@ -93,4 +93,9 @@ class MainViewModelTest {
         mainViewModel.getStudentAllLiveDta().observeForever(mockObserver)
         verify(mockObserver, times(1)).onChanged(listStudent.value)
     }
+
+    @Test
+    fun deleteTableStudent() {
+        mainViewModel.deleteTableStudent()
+    }
 }

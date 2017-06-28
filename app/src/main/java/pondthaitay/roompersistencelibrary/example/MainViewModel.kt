@@ -24,6 +24,8 @@ class MainViewModel(private val studentDataSource: StudentDataSource) : ViewMode
 
     fun getStudentAllLiveDta() = studentDataSource.getStudentAllLiveData()
 
+    fun deleteTableStudent() = studentDataSource.deleteTable()
+
     class MainViewModelFactory(val studentDataSource: StudentDataSource) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>?): T = MainViewModel(studentDataSource) as T
