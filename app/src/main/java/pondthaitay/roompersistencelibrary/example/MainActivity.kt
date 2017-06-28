@@ -1,8 +1,13 @@
 package pondthaitay.roompersistencelibrary.example
 
 import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import pondthaitay.roompersistencelibrary.example.persistence.AddressModel
 import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 
@@ -30,5 +35,14 @@ class MainActivity : LifecycleActivity() {
         val mMainViewModelFactory = Injection.provideMainViewModelFactory(this)
         val mMainViewModel = ViewModelProviders.of(this, mMainViewModelFactory)
                 .get(MainViewModel::class.java)
+
+        mMainViewModel.getStudentAllLiveDta().observe(this, Observer {
+            it?.forEach { Log.d(TAG, "$it") }
+        })
+
+        btn_insert_student.setOnClickListener {  mMainViewModel.insertStudent(scoopsStudent)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { Log.d(TAG, "insert complete") } }
     }
 }

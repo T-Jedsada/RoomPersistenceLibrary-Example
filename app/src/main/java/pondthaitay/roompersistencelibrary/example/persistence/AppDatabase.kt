@@ -7,7 +7,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.migration.Migration
 import android.content.Context
 
-@Database(entities = arrayOf(StudentEntity::class), version = 2)
+@Database(entities = arrayOf(StudentEntity::class), version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
