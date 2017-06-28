@@ -5,6 +5,9 @@ import io.reactivex.Flowable
 import pondthaitay.roompersistencelibrary.example.StudentDataSource
 
 class LocalStudentDataSource(val studentDao: StudentDao) : StudentDataSource {
+    override fun getStudentAllLiveData(): LiveData<List<StudentEntity>> =
+            studentDao.getStudentAllLiveData()
+
     override fun insertStudent(studentEntity: StudentEntity) =
             studentDao.insertStudent(studentEntity)
 

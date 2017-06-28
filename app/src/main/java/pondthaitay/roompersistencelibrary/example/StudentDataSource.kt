@@ -1,5 +1,6 @@
 package pondthaitay.roompersistencelibrary.example
 
+import android.arch.lifecycle.LiveData
 import io.reactivex.Flowable
 import pondthaitay.roompersistencelibrary.example.persistence.StudentEntity
 
@@ -11,6 +12,8 @@ interface StudentDataSource {
     fun deleteStudent(studentEntity: StudentEntity)
 
     fun getStudentAll(): Flowable<List<StudentEntity>>
+
+    fun getStudentAllLiveData(): LiveData<List<StudentEntity>>
 
     fun getStudentByCode(studentCode: Int): Flowable<List<StudentEntity>>
 

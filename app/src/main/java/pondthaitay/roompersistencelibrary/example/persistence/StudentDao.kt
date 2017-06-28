@@ -1,5 +1,6 @@
 package pondthaitay.roompersistencelibrary.example.persistence
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -17,8 +18,8 @@ interface StudentDao {
     @Delete
     fun deleteStudent(studentEntity: StudentEntity)
 
-//    @Query("SELECT * FROM student")
-//    fun getStudentAll(): Flowable<List<StudentEntity>>
+    @Query("SELECT * FROM student")
+    fun getStudentAllLiveData(): LiveData<List<StudentEntity>>
 
     @Query("SELECT * FROM student")
     fun getStudentAll(): Flowable<List<StudentEntity>>
